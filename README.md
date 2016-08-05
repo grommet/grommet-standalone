@@ -74,3 +74,23 @@ need to make depending on the size of your bundle.
 
 Please join our Slack channel if you have any questions regarding Grommet or
 this project: http://slackin.grommet.io
+
+## Usage
+
+  * Install npm dependencies
+  
+  ```command
+  npm install
+  ```
+  
+  * Build the javascript bundle
+  
+  ```command
+  npm run build
+  ```
+  
+  or 
+  
+  ```command
+  webpack
+  ```
