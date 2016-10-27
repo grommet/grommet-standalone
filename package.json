@@ -9,7 +9,7 @@
     "url": "https://github.com/grommet/grommet-standalone.git"
   },
   "dependencies": {
-    "grommet": "^0.6.9",
+    "grommet": "^1.0.0",
     "react": "^15.2.0",
     "react-dom": "^15.2.0"
   },
