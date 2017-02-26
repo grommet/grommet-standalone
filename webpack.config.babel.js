@@ -7,35 +7,38 @@ export default {
 		filename: 'index.js'
 	},
 	resolve: {
-		extensions: ['', '.js', '.scss', '.css']
+		extensions: ['.js', '.scss', '.css', '.json']
 	},
 	plugins: [
 		new webpack.optimize.UglifyJsPlugin({
-	    compress: {
-	      warnings: false
-	    }
-	  })
+			compress: {
+				warnings: false
+			}
+		})
 	],
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.js/,
 				exclude: /node_modules/,
-				loaders: ['babel']
+				loader: 'babel-loader'
 			},
 			{
-			 test: /\.scss$/,
-			 loader: 'style!css!sass?outputStyle=compressed'
-		  }
-		]
-	},
-	sassLoader: {
-		includePaths: [
-			'./node_modules',
-			// this is required only for NPM < 3.
-	 	  // Dependencies are flat in NPM 3+ so pointing to
-			// the internal grommet/node_modules folder is not needed
-			'./node_modules/grommet/node_modules'
+				test: /\.scss$/,
+				use: [
+					{
+						loader: 'style-loader'
+					},
+					{
+						loader: 'css-loader'
+					},
+					{
+						loader: 'sass-loader', options: {
+							includePaths: ['./node_modules']
+						}
+					}
+				]
+			},
 		]
 	}
 };
