@@ -14,31 +14,33 @@ In this project we are using Webpack, here is the required configuration for
 the loaders:
 
 ```javascript
-	module: {
-		rules: [
-			{
-				test: /\.js/,
-				exclude: /node_modules/,
-				loader: 'babel-loader'
-			},
-			{
-				test: /\.scss$/,
-				use: [
-					{
-						loader: 'style-loader'
-					},
-					{
-						loader: 'css-loader'
-					},
-					{
-						loader: 'sass-loader', options: {
-							includePaths: ['./node_modules']
-						}
-					}
-				]
-			},
-		]
-	}
+module: {
+  rules: [
+    {
+      exclude: /node_modules/,
+      test: /\.js/,
+      use: [
+        { loader: 'babel-loader' }
+      ]
+    },
+    {
+      test: /\.scss$/,
+      use: [
+        {
+          loader: 'style-loader'
+        },
+        {
+          loader: 'css-loader'
+        },
+        {
+          loader: 'sass-loader', options: {
+            includePaths: ['./node_modules', './node_modules/grommet/node_modules']
+          }
+        }
+      ]
+    },
+  ]
+}
 ```
 
 The SASS loader requires you to include the paths you want them to look for
@@ -66,10 +68,17 @@ in the dist folder:
 
 ```javascript
 {
- test: /\.scss$/,
- use: [
-   { loader: 'file-loader?name=assets/css/[name].css!sass' }
- ]
+  test: /\.scss$/,
+  use: [
+    { loader: 'file-loader'
+      options: {
+        name: 'assets/css/[name].css'
+      }
+    },
+    { 
+      loader: 'sass-loader' 
+    }
+  ]
 }
 ```
 
