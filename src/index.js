@@ -12,11 +12,11 @@ import Title from 'grommet/components/Title';
 import Value from 'grommet/components/Value';
 
 class Main extends Component {
-  render () {
+  render() {
     return (
       <App centered={false}>
-        <Header direction="row" justify="between" large={true}
-          pad={{horizontal: 'medium'}}>
+        <Header direction="row" justify="between" size="large"
+          pad={{ horizontal: 'medium' }}>
           <Title>Grommet standalone</Title>
         </Header>
         <Box pad='medium'>

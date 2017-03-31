@@ -15,25 +15,30 @@ the loaders:
 
 ```javascript
 module: {
-  loaders: [
+  rules: [
     {
-      test: /\.js/,
       exclude: /node_modules/,
-      loaders: ['babel']
+      test: /\.js/,
+      use: [
+        { loader: 'babel-loader' }
+      ]
     },
     {
-     test: /\.scss$/,
-     loader: 'style!css!sass?outputStyle=compressed'
-    }
-  ]
-},
-sassLoader: {
-  includePaths: [
-    './node_modules',
-    // this is required only for NPM < 3.
-    // Dependencies are flat in NPM 3+ so pointing to
-    // the internal grommet/node_modules folder is not needed
-    './node_modules/grommet/node_modules'
+      test: /\.scss$/,
+      use: [
+        {
+          loader: 'style-loader'
+        },
+        {
+          loader: 'css-loader'
+        },
+        {
+          loader: 'sass-loader', options: {
+            includePaths: ['./node_modules', './node_modules/grommet/node_modules']
+          }
+        }
+      ]
+    },
   ]
 }
 ```
@@ -63,8 +68,17 @@ in the dist folder:
 
 ```javascript
 {
- test: /\.scss$/,
- loader: 'file?name=assets/css/[name].css!sass'
+  test: /\.scss$/,
+  use: [
+    { loader: 'file-loader'
+      options: {
+        name: 'assets/css/[name].css'
+      }
+    },
+    { 
+      loader: 'sass-loader' 
+    }
+  ]
 }
 ```
 
@@ -83,18 +97,24 @@ this project: http://slackin.grommet.io
   npm install
   ```
   
-  * Build the javascript bundle
+  * To build the app, execute:
   
   ```command
   npm run build
   ```
   
-  or 
+  * To build the app and automatically rebuild upon file changes, execute:
   
   ```command
-  webpack
+  npm run watch
   ```
+
+  * To build the app, serve the app, automatically rebuild and reload the browser upon file changes, execute:
   
+  ```command
+  npm run serve
+  ```
+
 ## grommet-toolbox is your friend
 
 If you need sass linting, javascript linting, dev server, minification, ... Grommet toolbox is a project that offers a developer environment for Grommet apps. Check it out: https://github.com/grommet/grommet-toolbox
